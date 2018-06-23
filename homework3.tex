@@ -1,0 +1,685 @@
+\documentclass[12pt, oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}                		% See geometry.pdf to learn the layout options. There are lots.
+
+\usepackage{libertine}
+\usepackage{setspace}
+\usepackage{mathtools}
+                  		% ... or a4paper or a5paper or ... 
+%\geometry{landscape}                		% Activate for rotated page geometry
+%\usepackage[parfill]{parskip}    
+\usepackage{graphicx}				% Use pdf, png, jpg, or eps§ with pdflatex; use eps in DVI mode		
+
+\usepackage{amssymb}
+\usepackage{epsfig}
+\usepackage{url}
+
+%header and footer
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage{datetime}
+
+\begin{document}
+	
+\begin{titlepage}
+	\begin{center}
+	\line(1,0){400} \\
+    [0.25in]
+    \Huge{\bfseries CS 210, Spring- Homwork 3} \\
+    [2mm]
+    \line(1,0){400} \\
+    [3 cm]
+    
+    \textsc{\LARGE Kamalika Poddar} \\
+   
+    \textsc{\LARGE Student ID - 862002289 } \\
+  
+    \textsc{\LARGE University of California, Riverside} \\
+    [0.7cm]
+  \vspace*{7 cm}
+  \today
+    \end{center} 
+
+\end{titlepage}
+
+\newpage
+\vspace{2cm}
+
+\begin{center}
+\textbf{ \Large ANSWERS}\\
+\end{center}
+
+\vspace{0.5cm}
+
+\subsection*{Singular Value Decomposition}
+
+If A is matrix of $mXn$, A can have singular value decompositon as: $A=U\sum V^T$, where U and V are orthogonal to each other and  D is the diagonal, the set of matrices  $U_{mXn}, V_{nXn}, \sum_{nXn}$\\
+$U^TU=I, V^TV=I$
+
+\begin{enumerate}
+	\setcounter{enumi}{0}
+	\item (T\&B 4.1) \textbf{Determine SVDs of the following matrices (by hand calculation):}\\
+	
+	(a) $\left( \begin{array}{cc} 3 & 0 \\ 0 & -2  \end{array} \right)$  \quad \\
+	
+	\textbf{Solution}\\
+	
+	$A=U\sum V^T$\\
+	
+	First we find $V^T$ \\
+	
+	 $A^TA =\left( \begin{array}{cc} 3 & 0 \\ 0 & -2  \end{array} \right)\left( \begin{array}{cc} 3 & 0 \\ 0 & -2  \end{array} \right) =\left( \begin{array}{cc} 9 & 0 \\ 0 & 4  \end{array} \right)$\\
+	 
+	 
+	 Now we find the Eigen vectors:
+	 $det(A^TA- \lambda I)= \left( \begin{array}{cc} 9-\lambda & 0 \\ 0 & 4- \lambda  \end{array} \right)$
+	 
+	 The Eigen values are $\lambda_1=9$ and $\lambda_2=4$ therefore $\sigma_1=3$ and $\sigma_2=2$ Therefore
+	 $$
+	 \sum =\left( \begin{array}{cc} 3 & 0 \\ 0 & 2  \end{array} \right) 
+	 $$
+	 
+	
+	Apply $\lambda= 9$\\
+	$$\left( \begin{array}{cc} 0 & 0 \\ 0 & -5  \end{array} \right) \left( \begin{array}{c} x \\ y \end{array} \right) =\left( \begin{array}{c} 0 \\ 0  \end{array} \right)$$ \\
+	
+	$-5y=0$ , $v_1= \left( \begin{array}{c} 1 \\ 0  \end{array} \right)$\\
+	
+	Apply $\lambda= 4$\\
+	$$\left( \begin{array}{cc} 5 & 0 \\ 0 & 0 \end{array} \right) \left( \begin{array}{c} x \\ y \end{array} \right) =\left( \begin{array}{c} 0 \\ 0  \end{array} \right)$$ \\
+	
+	$5x=0$ , $v_2= \left( \begin{array}{c} 0 \\ 1  \end{array} \right)$\\
+	Therefore: $$v^T=\left( \begin{array}{cc}1& 0 \\0& 1  \end{array} \right)$$
+	
+	Finding U
+	$$u_1= \frac{1}{\sigma_1}Av_1= \frac{1}{3}\left( \begin{array}{cc} 3&0 \\ 0& -2  \end{array} \right)\left( \begin{array}{c} 1 \\ 0  \end{array} \right)$$
+	$$u_1= \left( \begin{array}{c} 1 \\ 0  \end{array} \right)$$
+	
+	$$u_2= \frac{1}{\sigma_2}Av_2= \frac{1}{2}\left( \begin{array}{cc} 3&0 \\ 0& -2  \end{array} \right)\left( \begin{array}{c} 0 \\ 1  \end{array} \right)$$
+	$$= \left( \begin{array}{c} 0 \\ -1  \end{array} \right)$$
+	
+	$
+	U= \left( \begin{array}{cc} 1&0 \\ 0& -1  \end{array} \right)
+	$
+	
+		$$A=U\sum V^T$$
+		
+		$$A=\left( \begin{array}{cc} 3 & 0 \\ 0 & -2  \end{array} \right)=\left( \begin{array}{cc} 1&0 \\ 0& -1  \end{array} \right) \left( \begin{array}{cc} 3 & 0 \\ 0 & 2  \end{array} \right) \left( \begin{array}{cc}1& 0 \\0& 1  \end{array} \right)$$\\
+
+	\vspace{2cm}
+	(b) $\left( \begin{array}{cc} 2 & 0 \\ 0 &  3  \end{array} \right)$  \quad \\
+	
+	\textbf{Solution}\\
+	
+	$A=U\sum V^T$\\
+	
+	First we find $V^T$ \\
+	
+	$A^TA =\left( \begin{array}{cc} 2 & 0 \\ 0 & 3  \end{array} \right)\left( \begin{array}{cc} 2 & 0 \\ 0 & 3  \end{array} \right) =\left( \begin{array}{cc} 4 & 0 \\ 0 & 9  \end{array} \right)$\\
+	
+	Now we find the Eigen vectors:
+	$det(A^TA- \lambda I)= \left( \begin{array}{cc} 4-\lambda & 0 \\ 0 & 9-\lambda  \end{array} \right)$\\
+	
+	
+	The Eigen values are $\lambda_1=4$ and $\lambda_2=9$ therefore $\sigma_1=2$ and $\sigma_2=3$ Therefore
+	$$
+	\sum =\left( \begin{array}{cc} 2 & 0 \\ 0 & 3  \end{array} \right) 
+	$$
+	
+	
+	Apply $\lambda= 4$\\
+	$$\left( \begin{array}{cc} 0 & 0 \\ 0 & 5  \end{array} \right) \left( \begin{array}{c} x \\ y \end{array} \right) =\left( \begin{array}{c} 0 \\ 0  \end{array} \right)$$ \\
+	
+	$5y=0$ , $v_1= \left( \begin{array}{c} 1 \\ 0  \end{array} \right)$\\
+	
+	Apply $\lambda= 9$\\
+	$$\left( \begin{array}{cc} -5 & 0 \\ 0 & 0 \end{array} \right) \left( \begin{array}{c} x \\ y \end{array} \right) =\left( \begin{array}{c} 0 \\ 0  \end{array} \right)$$ \\
+	
+	$-5x=0$ , $v_2= \left( \begin{array}{c} 0 \\ 1  \end{array} \right)$\\
+	Therefore: $$v^T=\left( \begin{array}{cc}1& 0 \\0& 1  \end{array} \right)$$
+	
+	Finding U
+	$$u_1= \frac{1}{\sigma_1}Av_1= \frac{1}{2}\left( \begin{array}{cc} 2&0 \\ 0& 3 \end{array} \right)\left( \begin{array}{c} 1 \\ 0  \end{array} \right)$$
+	$$u_1= \left( \begin{array}{c} 1 \\ 0  \end{array} \right)$$
+	
+	$$u_2= \frac{1}{\sigma_2}Av_2= \frac{1}{3}\left( \begin{array}{cc} 2&0 \\ 0& 3  \end{array} \right)\left( \begin{array}{c} 0 \\ 1  \end{array} \right)$$
+	$$= \left( \begin{array}{c} 0 \\ 1  \end{array} \right)$$
+	
+	$
+	U= \left( \begin{array}{cc} 1&0 \\ 0& 1  \end{array} \right)
+	$
+	
+	$$A=U\sum V^T$$
+	$$A=\left( \begin{array}{cc} 2 & 0 \\ 0 & 3  \end{array} \right)=\left( \begin{array}{cc} 1&0 \\ 0& 1  \end{array} \right) \left( \begin{array}{cc} 2 & 0 \\ 0 & 3  \end{array} \right) \left( \begin{array}{cc}1& 0 \\0& 1  \end{array} \right)$$\\
+	
+	(c) $\left( \begin{array}{cc} 0 & 2 \\ 0 & 0 \\ 0 & 0  \end{array} \right)$  \quad \\
+	
+	\textbf{Solution}\\
+	
+	$A=U\sum V^T$\\
+	
+	First we find $V^T$ \\
+	
+	$A^TA =\left( \begin{array}{ccc} 0 & 0&0 \\ 2 & 0&0  \end{array} \right) \left( \begin{array}{cc} 0 & 2 \\ 0 & 0\\ 0&0 \end{array} \right) =\left( \begin{array}{cc} 0 & 0 \\ 0 & 4  \end{array} \right)$\\
+	
+	Now we find the Eigen vectors:
+	$det(A^TA- \lambda I)= \left( \begin{array}{cc} 0 & 0 \\ 0 & 4  \end{array} \right)- \left( \begin{array}{cc} \lambda & 0 \\ 0 & \lambda  \end{array} \right) =\left( \begin{array}{cc} -\lambda & 0 \\ 0 & 4-\lambda  \end{array} \right)$\\
+	
+	
+	The Eigen values are $\lambda_1=4$, $\lambda_2=0$ and  $\sigma_1=2$, $\sigma_2=0$ Therefore $\sigma$ should take the order same as matrix A, U and V should be a square matrix of the number of rows and columns of A, respectively. 
+	$$
+	\sum =\left( \begin{array}{cc} 2 & 0 \\ 0 & 0 \\0&0 \end{array} \right) 
+	$$
+	
+	Apply $\lambda= 4$\\
+	$det(A^TA- \lambda I)= \left( \begin{array}{cc} 0 & 0 \\ 0 & 4  \end{array} \right)- \left( \begin{array}{cc} 4 & 0 \\ 0 & 4  \end{array} \right) =\left( \begin{array}{cc} -4 & 0 \\ 0 & 0  \end{array} \right)$\\
+
+	
+	$$\left( \begin{array}{cc} -4 & 0 \\ 0 & 0  \end{array} \right) \left( \begin{array}{c} x \\ y \end{array} \right) =\left( \begin{array}{c} 0 \\ 0  \end{array} \right)$$ \\
+	
+	$-4x=0$ , $v_1= \left( \begin{array}{c} 0 \\ 1  \end{array} \right)$\\
+	
+	Apply $\lambda= 0$\\
+	
+	$det(A^TA- \lambda I)= \left( \begin{array}{cc} 0 & 0 \\ 0 & 4  \end{array} \right)- \left( \begin{array}{cc} 0 & 0 \\ 0 & 0  \end{array} \right) =\left( \begin{array}{cc} 0 & 0 \\ 0 & 4  \end{array} \right)$\\
+	
+	$$\left( \begin{array}{cc} 0 & 0 \\ 0 & 4 \end{array} \right) \left( \begin{array}{c} x \\ y \end{array} \right) =\left( \begin{array}{c} 0 \\ 0  \end{array} \right)$$ \\
+	
+	$4y=0$ , $v_2= \left( \begin{array}{c} 1 \\ 0  \end{array} \right)$\\
+	Therefore: $$v^T=\left( \begin{array}{cc} 0 & 1 \\ 1 & 0  \end{array} \right)$$
+	
+	Finding U
+	$$u_1= \frac{1}{\sigma_1}Av_1= \frac{1}{2}\left( \begin{array}{cc} 2&0 \\ 0& 0 \\0&0 \end{array} \right)\left( \begin{array}{c} 0\\ 1  \end{array} \right)$$
+	$$u_1= \left( \begin{array}{c} 1 \\ 0 \\ 0 \end{array} \right)$$\\
+	
+	To find $u_2$, let $w=\left( \begin{array}{ccc} a&b&c  \end{array} \right)$ and $w.u=0$\\
+	
+	$w.u=\left( \begin{array}{ccc} a&b&c  \end{array} \right)\left( \begin{array}{c} 1\\0\\0 \end{array} \right)=0$
+	$a=0$\\
+	vector for $b=\left( \begin{array}{c} 0\\1\\0 \end{array} \right)$ and $c=\left( \begin{array}{c} 0\\0\\1 \end{array} \right)$
+	
+	Therefore:
+	$U= \left( \begin{array}{ccc} 1&0&0 \\ 0& 1 &0\\ 0&0&1 \end{array} \right)$
+	
+	$$A=U\sum V^T$$
+	$$A=\left( \begin{array}{cc} 0 & 2 \\ 0 & 0\\0&0  \end{array} \right)=\left( \begin{array}{ccc} 1&0&0 \\ 0& 1 &0\\ 0&0&1 \end{array} \right) \left( \begin{array}{cc} 2 & 0 \\ 0 & 0\\0&0  \end{array} \right) \left( \begin{array}{cc} 0 & 1 \\ 1 & 0  \end{array} \right)$$\\
+	
+	(d) $\left( \begin{array}{cc} 1 & 1 \\ 0 & 0  \end{array} \right)$  \quad\\
+	
+	\textbf{Solution}\\
+	
+	$A=U\sum V^T$\\
+	
+	First we find $V^T$ \\
+	
+	$A^TA =\left( \begin{array}{cc} 1 & 0 \\ 1 & 0 \end{array} \right) \left( \begin{array}{cc} 1 & 1 \\ 0 & 0 \end{array} \right) =\left( \begin{array}{cc} 1 & 1 \\ 1 & 1  \end{array} \right)$\\
+	
+	Now we find the Eigen vectors:
+	$det(A^TA- \lambda I)= \left( \begin{array}{cc} 1 & 1 \\ 1 & 1  \end{array} \right)- \left( \begin{array}{cc} \lambda & 0 \\ 0 & \lambda  \end{array} \right) =\left( \begin{array}{cc} 1-\lambda & 0 \\ 0 & 1-\lambda  \end{array} \right)$\\
+	
+	$(1-\lambda)(1-\lambda)-1=0$\\
+	$1-\lambda-\lambda-\lambda^2-1=0$\\
+	$\lambda^2 -2\lambda=0$\\
+	$\lambda(\lambda -2)=0$\\
+	$ \lambda_1=2$,$\lambda_2=0$
+	
+	
+	The Eigen values are $\lambda_1=2$, $\lambda_2=0$ and  $\sigma_1=\sqrt{2}$, $\sigma_2=0$ Therefore $\sigma$ should take the order same as matrix A, U and V should be a square matrix of the number of rows and columns of A, respectively. 
+	$$
+	\sum =\left( \begin{array}{cc} \sqrt{2} & 0 \\ 0 & 0 \end{array} \right) 
+	$$
+	
+	Apply $\lambda= 2$\\
+	$det(A^TA- \lambda I)= \left( \begin{array}{cc} 1 & 1 \\ 1 & 1  \end{array} \right)- \left( \begin{array}{cc} 2 & 0 \\ 0 & 2  \end{array} \right) =\left( \begin{array}{cc} -1 & 1 \\ 1 & -1 \end{array} \right)$\\
+	
+	$R_1 + R_2 \implies R_1$
+	
+	
+	$$\left( \begin{array}{cc} 0 & 0 \\ 1 & -1  \end{array} \right) \left( \begin{array}{c} x \\ y \end{array} \right) =\left( \begin{array}{c} 0 \\ 0  \end{array} \right)$$ \\
+	
+	$x-y=0$ , $x=y$, $L=\sqrt{x^2+y^2}= x\sqrt{2}$\\ 
+	Therefore $v_1= \left( \begin{array}{c} x \\ y  \end{array} \right)=\left( \begin{array}{c} \frac{x}{x\sqrt{2}} \\ \frac{x}{x\sqrt{2}} \end{array} \right) = \left( \begin{array}{c} \frac{1}{\sqrt{2}} \\ \frac{1}{\sqrt{2}} \end{array} \right)$\\
+	
+	Apply $\lambda= 0$\\
+	
+	$det(A^TA- \lambda I)= \left( \begin{array}{cc} 1 & 1 \\ 1 & 1  \end{array} \right)- \left( \begin{array}{cc} 0 & 0 \\ 0 & 0  \end{array} \right) =\left( \begin{array}{cc} 1 & 1 \\ 1 & 1  \end{array} \right)$\\
+	
+	$R_1 - R_2 \implies R_1$
+	
+	
+	$$\left( \begin{array}{cc} 0 & 0 \\ 1 & 1  \end{array} \right) \left( \begin{array}{c} x \\ y \end{array} \right) =\left( \begin{array}{c} 0 \\ 0  \end{array} \right)$$ \\
+	
+	$x+y=0$ , $x=-y$, $L=\sqrt{x^2+y^2}= x\sqrt{2}$\\ 
+	Therefore $v_1= \left( \begin{array}{c} x \\ y  \end{array} \right)=\left( \begin{array}{c} \frac{x}{x\sqrt{2}} \\ -\frac{x}{x\sqrt{2}} \end{array} \right) = \left( \begin{array}{c} \frac{1}{\sqrt{2}} \\ -\frac{1}{\sqrt{2}} \end{array} \right)$\\
+	Therefore: $$v^T=\left( \begin{array}{cc} \frac{1}{\sqrt{2}}& \frac{1}{\sqrt{2}} \\  \frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{2}}   \end{array} \right)$$
+	
+	Finding U
+	$$u_1= \frac{1}{\sigma_1}Av_1= \frac{1}{\sqrt{2}}\left( \begin{array}{cc} 1&1 \\ 0& 0 \end{array} \right) \left( \begin{array}{c} \frac{1}{\sqrt{2}} \\ \frac{1}{\sqrt{2}}  \end{array} \right)$$
+	$$u_1= \left( \begin{array}{c} 1 \\ 0 \end{array} \right)$$\\
+	
+	To find $u_2$, let $w=\left( \begin{array}{cc} a&b  \end{array} \right)$ and $w.u=0$\\
+	
+	$w.u=\left( \begin{array}{cc} a&b  \end{array} \right)\left( \begin{array}{c} 1\\0 \end{array} \right)=0$
+	$a=0$\\
+	vector for $b=\left( \begin{array}{c} 0\\1 \end{array} \right)$ \\
+	
+	Therefore:
+	$U= \left( \begin{array}{cc} 1&0 \\ 0& 1 \end{array} \right)$
+	
+	$$A=U\sum V^T$$\\
+	
+	$$A= \left( \begin{array}{cc} 1 & 1 \\ 0 & 0  \end{array} \right)= \left( \begin{array}{cc} 1&0 \\ 0& 1 \end{array} \right) \left( \begin{array}{cc} \sqrt{2} & 0 \\ 0 & 0 \end{array} \right) \left( \begin{array}{cc} \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} \\ \frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{2}}  \end{array} \right)$$\\
+	
+	
+	(e) $\left( \begin{array}{cc} 1 & 1 \\ 1 & 1  \end{array} \right)$\\
+	
+	\textbf{Solution}\\
+	
+	
+	$A=U\sum V^T$\\
+	
+	First we find $V^T$ \\
+	
+	$A^TA =\left( \begin{array}{cc} 1 & 1 \\ 1 & 1 \end{array} \right) \left( \begin{array}{cc} 1 & 1 \\ 1 & 1 \end{array} \right) =\left( \begin{array}{cc} 2 & 2 \\ 2 & 2  \end{array} \right)$\\
+	
+	Now we find the Eigen vectors:
+	$det(A^TA- \lambda I)= \left( \begin{array}{cc} 2 & 2 \\ 2 & 2  \end{array} \right)- \left( \begin{array}{cc} \lambda & 0 \\ 0 & \lambda  \end{array} \right) =\left( \begin{array}{cc} 2-\lambda & 2 \\ 2 & 2-\lambda  \end{array} \right)$\\
+	
+	$(2-\lambda)(2-\lambda)-4=0$\\
+	$4-2\lambda-2\lambda-\lambda^2=4$\\
+	$\lambda^2 -4\lambda=0$\\
+	$\lambda(\lambda -4)=0$\\
+	$ \lambda_1=4$,$\lambda_2=0$
+	
+	
+	The Eigen values are $\lambda_1=4$, $\lambda_2=0$ and  $\sigma_1=2$, $\sigma_2=0$ Therefore $\sigma$ should take the order same as matrix A, U and V should be a square matrix of the number of rows and columns of A, respectively. 
+	$$
+	\sum =\left( \begin{array}{cc} 2 & 0 \\ 0 & 0 \end{array} \right) 
+	$$
+	
+	Apply $\lambda= 4$\\
+	$det(A^TA- \lambda I)= \left( \begin{array}{cc} 2 & 2 \\ 2 & 2  \end{array} \right)- \left( \begin{array}{cc} 2 & 0 \\ 0 & 2  \end{array} \right) =\left( \begin{array}{cc} -2 & 2 \\ 2 & -2 \end{array} \right)$\\
+	
+	$R_1 + R_2 \implies R_1$
+	
+	
+	$$\left( \begin{array}{cc} 0 & 0 \\ 2 & -2  \end{array} \right) \left( \begin{array}{c} x \\ y \end{array} \right) =\left( \begin{array}{c} 0 \\ 0  \end{array} \right)$$ \\
+	
+	$x-y=0$ , $x=y$, $L=\sqrt{x^2+y^2}= x\sqrt{2}$\\ 
+	Therefore $v_1= \left( \begin{array}{c} x \\ y  \end{array} \right)=\left( \begin{array}{c} \frac{x}{x\sqrt{2}} \\ \frac{x}{x\sqrt{2}} \end{array} \right) = \left( \begin{array}{c} \frac{1}{\sqrt{2}} \\ \frac{1}{\sqrt{2}} \end{array} \right)$\\
+	
+	Apply $\lambda= 0$\\
+	
+	$det(A^TA- \lambda I)= \left( \begin{array}{cc} 2 & 2 \\ 2 & 2  \end{array} \right)- \left( \begin{array}{cc} 0 & 0 \\ 0 & 0  \end{array} \right) =\left( \begin{array}{cc} 2 & 2 \\ 2 & 2  \end{array} \right)$\\
+	
+	$R_1 - R_2 \implies R_1$
+	
+	
+	$$\left( \begin{array}{cc} 0 & 0 \\ 2 & 2  \end{array} \right) \left( \begin{array}{c} x \\ y \end{array} \right) =\left( \begin{array}{c} 0 \\ 0  \end{array} \right)$$ \\
+	
+	$x+y=0$ , $x=-y$, $L=\sqrt{x^2+y^2}= x\sqrt{2}$\\ 
+	Therefore $v_1= \left( \begin{array}{c} x \\ y  \end{array} \right)=\left( \begin{array}{c} \frac{x}{x\sqrt{2}} \\ -\frac{x}{x\sqrt{2}} \end{array} \right) = \left( \begin{array}{c} \frac{1}{\sqrt{2}} \\ -\frac{1}{\sqrt{2}} \end{array} \right)$\\
+	Therefore: $$v^T=\left( \begin{array}{cc} \frac{1}{\sqrt{2}}& \frac{1}{\sqrt{2}} \\  \frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{2}}   \end{array} \right)$$
+	
+	Finding U
+	$$u_1= \frac{1}{\sigma_1}Av_1= \frac{1}{2}\left( \begin{array}{cc} 1&1 \\ 1& 1 \end{array} \right) \left( \begin{array}{c} \frac{1}{\sqrt{2}} \\ \frac{1}{\sqrt{2}}  \end{array} \right)$$
+	$$u_1= \left( \begin{array}{c}  \frac{1}{\sqrt{2}}\\  \frac{1}{\sqrt{2}} \end{array} \right)$$\\
+	
+	To find $u_2$, let $w=\left( \begin{array}{cc} a&b  \end{array} \right)$ and $w.u=0$\\
+	
+	$w.u=\left( \begin{array}{cc} a&b  \end{array} \right)\left( \begin{array}{c}  \frac{1}{\sqrt{2}} \\  \frac{1}{\sqrt{2}} \end{array} \right)=0$,
+	$a=-b$\\
+	vector for $b=\left( \begin{array}{c}  \frac{1}{\sqrt{2}} \\  - \frac{1}{\sqrt{2}} \end{array} \right)$ \\
+	
+	Therefore:
+	$U= \left( \begin{array}{cc}  \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} \\  \frac{1}{\sqrt{2}}& - \frac{1}{\sqrt{2}} \end{array} \right)$
+	
+	$$A=U\sum V^T$$\\
+	
+	$$A= \left( \begin{array}{cc} 1 & 1 \\ 1 & 1  \end{array} \right)= \left( \begin{array}{cc}  \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} \\  \frac{1}{\sqrt{2}} & - \frac{1}{\sqrt{2}} \end{array} \right) \left( \begin{array}{cc} 2 & 0 \\ 0 & 0 \end{array} \right) \left( \begin{array}{cc} \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} \\ \frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{2}}  \end{array} \right)$$\\
+	
+	
+	\item \textbf{Let $A$ be an $m \times n$ singular matrix of rank $r$ with SVD
+	\begin{align*}
+	A = U \Sigma V^T &= 
+	\left( \begin{array}{c|c|c|c} &&& \\ &&& \\ \vec{u}_1 & \vec{u}_2 & \ldots & \vec{u}_m \\ &&& \\ &&&  \end{array} \right)
+	\left( \begin{array}{cccccc} \sigma_1 &&&&& \\ & \ddots &&&& \\ && \sigma_r &&& \\ &&& 0 &&\\ &&&& \ddots &\\  &&&&& 0 \end{array} \right)
+	\left( \begin{array}{ccccccc} &&& \vec{v}_1^T &&& \\ \hline &&& \vec{v}_2^T &&& \\ \hline &&& \vdots &&& \\ \hline &&&
+	\vec{v}_n^T &&&  \end{array} \right) \\
+	& = \left( \begin{array}{cc} \hat{U} & \tilde{U} \end{array} \right) 
+	\left( \begin{array}{cccccc} \sigma_1 &&&&& \\ & \ddots &&&& \\ && \sigma_r &&& \\ &&& 0 &&\\ &&&& \ddots &\\  &&&&& 0 \end{array} \right)
+	\left( \begin{array}{c} \hat{V}^T \\ \tilde{V}^T \end{array} \right) \\
+	\end{align*}
+	where $\sigma_1 \geq  \ldots \geq \sigma_r > 0$, $\hat{U}$ consists of the first $r$ columns of $U$, $\tilde{U}$ consists of the remaining $m-r$ columns of $U$,
+	$\hat{V}$ consists of the first $r$ columns of $V$, and $\tilde{V}$ consists of the remaining $n-r$ columns of $V$.
+	Give bases for the spaces range($A$), null($A$), range($A^T$) and null($A^T$) in terms of the components of the SVD of
+	$A$, and a brief justification.}\\
+	
+	\textbf{Solution}\\
+	
+		\textbf{The SVD of $A=U \sum^T V^T$,}\\
+
+	First A can be written as \\
+	
+	$ A=\sum_{i=1}^{n} \sigma_i u_i v_i^T=\sum_{i=1}^{r} \sigma_i u_i v_i^T$\\
+	
+	Let a vector $x \in R^n$ is multiplied with matrix A, we get:
+	$$ Ax=\sum_{i=1}^{n} \sigma_i u_i v_i^Tx=\sum_{i=1}^{r} \sigma_i u_i (v_i^Tx)$$
+	
+	This shows $y=Ax$ in the range of A is a linear combination of $u_i,$ where $1 \leq i \leq r$ and the columns of $\hat{U}$ form a basis for $range(A)$.\\
+	
+	Now z be a vector such that $Az=0$ where $z \in null(A)$. Then:\\
+	$$Az=\sum_{i=1}^{r} \sigma_i(v_i^Tz)u_i=0$$
+	
+	Since $\sigma_i$ can be zero and $u_i$ is linearly independent so $v^Tz=0$ or $z \perp \bar{V}.$ Therefore $z \in span(\bar{V})$ so the columns of $\bar{V}$ form the basis for null(A).\\
+	
+	\textbf{The SVD of $A^T=V \sum^T U^T$,}\\
+	
+	$ A=\sum_{i=1}^{n} \sigma_i v_i u_i^T=\sum_{i=1}^{r} \sigma_i v_i u_i^T$\\
+	
+	Let a vector $x \in R^n$ is multiplied with matrix A, we get:
+	$$ Ax=\sum_{i=1}^{n} \sigma_i v_i u_i^Tx=\sum_{i=1}^{r} \sigma_i v_i (u_i^Tx)$$
+	
+	This shows $y=Ax$ in the range of A is a linear combination of $u_i,$ where $1 \leq i \leq r$ and the columns of $\hat{V}$ form a basis for $range(A^T)$.\\
+	
+	Now z be a vector such that $Az=0$ where $z \in null(A)$. Then:\\
+	$$Az=\sum_{i=1}^{r} \sigma_i(u_i^Tz)v_i=0$$
+	
+	Since $\sigma_i$ can be zero and $v_i$ is linearly independent so $u^Tz=0$ or $z \perp \bar{U}.$ Therefore $z \in span(\bar{U})$ so the columns of $ \bar{U}$ form the basis for $null(A^T)$.\\
+	
+	Therfore:\\
+	
+	$\hspace{2cm}range(A)=\hat{U},  \hspace{2cm} null(A)=\bar{V}$\\
+	
+	$\hspace{2cm}range(A^T)=\hat{V}, \hspace{2cm} range(A)=\bar{U}$\\
+	
+	\item \textbf{Use the SVD of $A$ to show that for an $m \times n$ matrix of full column rank $n$, the matrix $A (A^TA)^{-1} A^T$ is an orthogonal
+	projector onto range($A$).}\\
+	
+	\textbf{Solution}\\
+	Let $B= A (A^TA)^{-1} A^T$, 
+	First we find the that B is projector i.e, it is idempotent $B^2=B$\\
+	
+	To proof:\\
+	
+	$$B^B=B=(A (A^TA)^{-1} A^T)(A (A^TA)^{-1} A^T)= A (A^TA)^{-1} A^T$$
+	$$=(A (A^TA)^{-1} (A^TA) (A^TA)^{-1} A^T)$$
+	$$=(A  (A^TA)^{-1} A^T)$$\\
+	
+	Next we find if B is orthogonal projector if $B=B^T$\\
+		$$B^T=[A  (A^TA)^{-1} A^T]^T$$
+		$$B^T=[A^T (A^TA)^{-T} (A^T)^T]$$
+		$$=[A (A^TA)^{-T} (A^T)]$$
+		$$=[A (A^TA)^{-1} (A^T)]= B$$\\
+	Finally we show $range(B)=range(A)$, we can write A as it has full column rank n, $A= \sum_{i=1}^{n} \sigma_i u_i v_i^T$, $\sigma_1 \geq... \geq \sigma_n > 0 $\\
+	Substitute the above expression in $B= A (A^TA)^{-1} A^T$, we get\\
+	
+	$B= A (A^TA)^{-1} A^T= (\sum_{i=1}^{n} \sigma_i u_i v_i^T)[(\sum_{i=1}^{n} \sigma_i v_i u_i^T)(\sum_{i=1}^{n} \sigma_i u_i v_i^T)]^{-1}(\sum_{i=1}^{n} \sigma_i v_i u_i^T)$\\
+	
+	$=(\sum_{i=1}^{n} \sigma_i u_i v_i^T)(\sum_{i=1}^{n} \sigma_i^2 u_i u_i^T v_i v_i^T)^{-1}(\sum_{i=1}^{n} \sigma_i v_i u_i^T)$\\
+	
+	$=(\sum_{i=1}^{n} \sigma_i u_i v_i^T)(\sum_{i=1}^{n} \sigma_i^{-2} u_i u_i^T v_i v_i^T)(\sum_{i=1}^{n} \sigma_i v_i u_i^T)$\\
+	
+	$=(\sum_{i=1}^{n} \sigma_i^{-1} u_i v_i^T)(\sum_{i=1}^{n} \sigma_i v_i u_i^T)=(\sum_{i=1}^{n}  u_i u_i^T) $\\
+	
+	Therefore $range(B)=span(u_1.....u_n)= range(A)$\\
+	
+\end{enumerate}
+
+
+\subsection*{Least Squares}
+
+
+\begin{enumerate}
+	\setcounter{enumi}{3}
+	\item \textbf{ Suppose you are fitting a straight line to the three data points (0,1), (1,2), (3,3). }\\
+	
+	\textbf{a) Set up the overdetermined linear system for the least squares problem.}
+	
+	\textbf{Solution.}\\
+	
+	The equation of the straight line be : $p(x)=a_0 +a_1x$ for the data points (0,1),(1,2), (3,3). First we will write the overdetermined system and try to find if it has solution. Our equations are:\\
+	
+	$ a_0 +a_1.0=1$\\
+	$ a_0 +a_1.1=2$\\
+	$ a_0 +a_1.3=3$\\
+	
+	Writing it as a matrix problem as $Ax=b$, we have\\
+	
+	$$\left(\begin{array}{cc}1&0\\1&1\\1&3\end{array}\right)\left(\begin{array}{c}a_0\\a_1\end{array}\right)=\left(\begin{array}{c}1\\2\\3\end{array}\right)$$
+	We know that this will yield a solution if right hand side is a linear combination of the columns of co-efficient of matrix A. The rank of the above matrix is 2. Moreover $(1,2,3)^T$ is not in the $R(A)$ i.e., not in the span of \{$(1,1,1)^T,(0,1,3)^T$\}. Solving the above equations we get $a_0=1$ and $a_1=1, \frac{2}{3}$, therefore the system doesn't have a solution. So we can find the solution if out data points were: (0,1),(1,2)(3,4)
+		$$\left(\begin{array}{c}1\\2\\4\end{array}\right)=\left(\begin{array}{c}1\\1\\1\end{array}\right)+ \left(\begin{array}{c}0\\1\\3\end{array}\right)$$
+		
+	Therefore the equation $1+x$  passes through all the points.\\
+	
+	In general we use a residual vector $||r= b-Ax||$to solve for the equation.
+		$$\left(\begin{array}{c}1\\2\\3\end{array}\right)- \left(\begin{array}{cc}1&0\\1&1\\1&3\end{array}\right)\left(\begin{array}{c}a_0\\a_1\end{array}\right)=\left(\begin{array}{c}1-a_0\\2-a_0 -a_1\\3-a_0 -3a_1\end{array}\right)$$
+		
+		Now $||r||=(1-a_0)^2+(2-a_0 -a_1)^2+ (3-a_0 -3a_1)^2$.
+	Taking Differentiation w.r.t $a_0$ and $a_1$, we get:\\
+	$-2+2a_0-4 + 2a_0 +2a_1-6+2a_0+6a_1= -12+ 6a_0+8a_1$  \hspace{2cm }.........(i)
+	$-4 + 2a_0 +2a_1-6+2a_0+6a_1= -10+ 4a_0+8a_1$ \hspace{4cm }.........(ii)\\
+	Solving two equation we get  the linear system, 
+	$$\left(\begin{array}{cc}6&8\\4&8\end{array}\right)\left(\begin{array}{c}a_0\\a_1\end{array}\right)=\left(\begin{array}{c}12\\10\end{array}\right)$$
+	whose solution is $(1,0.75)^T$.\\
+	
+	
+	
+	\textbf{b) Set up the corresponding normal equations.}
+	
+	\textbf{Solution.}\\
+	
+	We can find the solution by the normal equation: $A^TAy=A^Tb$
+	$$\left(\begin{array}{ccc}1&1&1\\0&1&3\end{array}\right) \left(\begin{array}{cc}1&0\\1&1\\1&3\end{array}\right)\left(\begin{array}{c}a_0\\a_1\end{array}\right)=\left(\begin{array}{ccc}1&1&1\\0&1&3\end{array}\right)\left(\begin{array}{c}1\\2\\3\end{array}\right)$$
+	Simplifying, we get:$$\left(\begin{array}{cc}3&4\\4&10\end{array}\right)\left(\begin{array}{c}a_0\\a_1\end{array}\right)=\left(\begin{array}{c}6\\11\end{array}\right)$$
+	
+	Solving the equations we get, $(1.1428, 0.64285)^T$\\
+	
+	\textbf{c) Calculate the least squares solution by Cholesky factorization.}
+	
+	\textbf{Solution.}\\
+	
+	
+	A is a singular positive definite, we have to upper triangular matrix U, such that: $A=U^TU$ . Using Cholesky factorization we get:\\
+	$$\left(\begin{array}{cc}A_{11}&A_{12}\\A_{21}&A_{22}\end{array}\right) =\left(\begin{array}{cc}R_{11}&0\\R_{12}&R_{22}\end{array}\right) \left(\begin{array}{cc}R_{11}&R_{12}\\0&R_{22}\end{array}\right)= \left(\begin{array}{cc}R_{11}^2&R_{11}R_{12}\\R_{11}R_{12}&R_{12}^2 R_{22}^2\end{array}\right) $$
+	We get:  $R_{11}= \sqrt{3}$, $R_{12}= 4/ \sqrt{3}$, $R_{22}= \sqrt{14}/ \sqrt{3}$\\
+	Therefore:
+	$$\left(\begin{array}{cc}A_{11}&A_{12}\\A_{21}&A_{22}\end{array}\right) =\left(\begin{array}{cc}\sqrt{3}&0\\4/ \sqrt{3}&\sqrt{14}/ \sqrt{3}\end{array}\right) \left(\begin{array}{cc}\sqrt{3}&4/ \sqrt{3}\\0&\sqrt{14}/ \sqrt{3}\end{array}\right)$$
+	solve $R^Ty=b$,
+     $Rx=y$	
+	$$\left(\begin{array}{cc}\sqrt{3}&0\\4/ \sqrt{3}&\sqrt{14}/ \sqrt{3}\end{array}\right)\left(\begin{array}{c}y_0\\y_1\end{array}\right)=\left(\begin{array}{c}6\\11\end{array}\right)$$
+	
+	$y_0=6/ \sqrt{3}$ and  $y_1= \frac{3\sqrt{3}}{\sqrt{14}} $
+	
+	$$\left(\begin{array}{cc}\sqrt{3}&4/ \sqrt{3}\\0&\sqrt{14}/ \sqrt{3}\end{array}\right)\left(\begin{array}{c}x_0\\x_1\end{array}\right)=\left(\begin{array}{c}6/ \sqrt{3}\\\frac{3\sqrt{3}}{\sqrt{14}} \end{array}\right)$$
+	therefore we get: $x_0=\frac{8}{7}$ and  $x_1= \frac{9}{14} $
+	
+	Substituting the values in equation $R^TRx=b$
+	
+	$$\left(\begin{array}{cc}\sqrt{3}&0\\4/ \sqrt{3}&\sqrt{14}/ \sqrt{3}\end{array}\right) \left(\begin{array}{cc}\sqrt{3}&4/ \sqrt{3}\\0&\sqrt{14}/ \sqrt{3}\end{array}\right)\left(\begin{array}{c}\frac{8}{7}\\\frac{9}{14}\end{array}\right) = \left(\begin{array}{c}6\\11\end{array}\right)$$\\
+	
+	
+	\item \textbf{Consider the marix}
+	
+$$
+\left [\begin{array}{cc} 1&1\\
+\epsilon&0\\
+0&\epsilon\\			
+\end{array}\right]
+$$,
+\textbf{where $\epsilon \leq \sqrt{\epsilon_{mach}}$ and $\epsilon_{mach}$ is the machine precision of your floating-point number system.}
+\begin{enumerate}
+		\item \textbf{Show that matrix $AA^T$ is  singular in floating-point arithmetic.
+		Hint: You can say that $1+\epsilon^2\approx 1$ to simplify your floating point expressions. }\\
+		
+		\textbf{Solution.}\\
+		 $$
+		 A= \left [\begin{array}{cc} 1&1\\
+		 \epsilon&0\\
+		 0&\epsilon\\			
+		 \end{array}\right]
+		 $$,
+		 Then :$A^TA$, given:$1+\epsilon^2\approx 1$ we get:\\
+		 $$
+		 \left [\begin{array}{ccc} 1& \epsilon&0\\
+		 1&0& \epsilon		
+		 \end{array}\right] \left [\begin{array}{cc} 1&1\\
+		 \epsilon&0\\
+		 0&\epsilon\\			
+		 \end{array}\right]= \left [\begin{array}{cc} 1+ \epsilon^2&1\\
+		 1&1+ \epsilon^2		
+		 \end{array}\right]=\left [\begin{array}{cc} 1&1\\
+		 1&1		
+		 \end{array}\right]
+		 $$
+		 Hence the matrix $A^TA$ is singular in floating point arithmetic.\\
+		
+		
+		\item  \textbf{Compute the QR factorization and show that it is numerically nonsingular. Do so by applying two Householder reflections to A to obtain an upper triangular but non-square matrix,
+			$
+			R= \left [\begin{array}{c} R_1\\
+			0
+			\end{array}\right]
+			$  $\in R^{3 X2}$ where $R_1 \in R^{2X2}$ is the square upper triangular block of R corresponding to the reduced QR factorization $A = Q_1R_1$. Show that $R_1$ is nonsingular in floating-point arithmetic.
+			(Note: You do not need to construct Q or $Q_1$).}\\
+		
+		\textbf{Solution.}\\
+		
+		The Householder transformation is $$H=I - 2\frac{vv^T}{v^Tv},$$
+		First lets apply the first householder reflection to A, where v is a non-zero vector. We know vector norm of $\vec{a}$ is $\alpha=\sqrt{1+\epsilon^2+0} \approx1$, and \\$v= (a- \alpha e_1)\frac{vv^T}{v^Tv}$ but we ignore the scalar fator and we get:\\
+		$v_1= a_1- \alpha e_1=\left [\begin{array}{c} 1\\\epsilon\\
+		0\end{array}\right]- \left [\begin{array}{c} \alpha\\0\\
+		0\end{array}\right]= \left [\begin{array}{c}1- \alpha\\\epsilon\\
+		0\end{array}\right]=\left [\begin{array}{c} 0\\\epsilon\\
+		0\end{array}\right]$\\
+		
+		The first householder reflection matrix is given by:
+		$$H_1=I - 2\frac{vv^T}{v^Tv}= \left [\begin{array}{ccc} 1&0&0\\0&1&0\\0&0&1\end{array}\right]-2\frac{vv^T}{v^Tv}$$
+		
+		$v_1=\left [\begin{array}{c} 0\\\epsilon\\
+			0\end{array}\right]$, $v_1^T=\left [\begin{array}{ccc} 0&\epsilon&0\end{array}\right]$
+			
+		$$H_1=\left [\begin{array}{ccc} 1&0&0\\0&1&0\\0&0&1\end{array}\right]- \frac{2}{\epsilon^2}\left [\begin{array}{ccc} 0&0&0\\0&\epsilon^2&0\\0&0&0\end{array}\right]$$
+			
+		$$H_1=\left [\begin{array}{ccc} 1&0&0\\0&1&0\\0&0&1\end{array}\right]- \left [\begin{array}{ccc} 0&0&0\\0&2&0\\0&0&0\end{array}\right]= \left [\begin{array}{ccc} 1&0&0\\0&-1&0\\0&0&1\end{array}\right]$$
+			
+		
+		$$H_1A=\left [\begin{array}{ccc} 1&0&0\\0&1&0\\0&0&1\end{array}\right]- \left [\begin{array}{cc} 1&1\\\epsilon&0\\0&\epsilon\end{array}\right]= \left [\begin{array}{cc} 1&1\\-\epsilon&0\\0&\epsilon\end{array}\right]$$\\
+		
+			Finding the second householder matrix:\\
+			
+		$v_2= a_2- \alpha e_2=\left [\begin{array}{c} 0\\0\\\epsilon\end{array}\right]- \left [\begin{array}{c} 0\\\epsilon\\
+		0\end{array}\right]= \left [\begin{array}{c}0\\-\epsilon\\
+		0\end{array}\right]$\\
+		
+		The second householder reflection matrix is given by:
+		$$H_2=I - 2\frac{vv^T}{v^Tv}= \left [\begin{array}{ccc} 1&0&0\\0&1&0\\0&0&1\end{array}\right]-2\frac{vv^T}{v^Tv}$$\\
+		
+	
+		$v_2=\left [\begin{array}{c} 0\\-\epsilon\\
+		0\end{array}\right]$, $v_1^T=\left [\begin{array}{ccc} 0&-\epsilon&0\end{array}\right]$
+		
+		$$H_2=\left [\begin{array}{ccc} 1&0&0\\0&1&0\\0&0&1\end{array}\right]- \frac{2}{\epsilon^2}
+		\left [\begin{array}{ccc} 0&0&0\\0&\epsilon^2&-\epsilon^2\\0&-\epsilon^2&\epsilon^2\end{array}\right]$$
+		
+		$$H_2=\left [\begin{array}{ccc} 1&0&0\\0&1&0\\0&0&1\end{array}\right]- 
+		\left [\begin{array}{ccc} 0&0&0\\0&1&-1\\0&-1&1\end{array}\right]= \left [\begin{array}{ccc} 1&0&0\\0&0&1\\0&1&0\end{array}\right]$$
+		
+		Applying $ H_2$ we get:\\
+		$$H_2H_1A=\left [\begin{array}{ccc} 1&0&0\\0&1&0\\0&0&1\end{array}\right]\left [\begin{array}{cc} 1&1\\-\epsilon&0\\0&\epsilon\end{array}\right]=\left [\begin{array}{cc} 1&1\\0&\epsilon\\-\epsilon&0\end{array}\right]$$\\
+		
+		Given R is a 3X2 matrix where $R_1$ is a 2X2 matrix, therefore $R_1=\left [\begin{array}{cc} 1&1\\0&\epsilon\end{array}\right]$\\
+		Determinate of R is : $det(R_1)= \epsilon$, so found out the matri R is a non-singular matrix in floating point arithmetic.\\
+
+		
+\end{enumerate}
+
+\subsection*{Orthogonal and Householder Matrices}
+	\item \textbf{Let a be any nonzero vector. If $v= a- \alpha e_1$, where $\alpha= \pm ||a||_2$, and $$H=I - 2\frac{vv^T}{v^Tv},$$ show that $Ha=\alpha e_1$ .}\\
+	
+	\textbf{Solution.}\\
+	
+	$v= a- \alpha e_1$ , $v^T=( a- \alpha e_1)^T$
+	
+	$$H=I - 2\frac{vv^T}{v^Tv},$$
+	
+	$v^Tv=(a- \alpha e_1)^T( a- \alpha e_1)=a^Ta-\alpha^T e_1^Ta-a^T\alpha e_1 +\alpha^T e_1^T\alpha e_1 $
+	Both $\alpha$ and a are scaler quantity so we can write it as:\\
+	$\alpha^T e_1^Ta-a^T\alpha e_1=-2a^T\alpha e_1$\\
+	
+	Hence:\\
+	$=a^Ta-2\alpha e_1^Ta+\alpha^2 e_1^Te_1 $\\
+	$=a^Ta+\alpha^2 e_1^Te_1 -2\alpha e_1^Ta$\\
+	$=\alpha^2+\alpha^2-2\alpha e_1^Ta$\\
+	$=2\alpha^2-2\alpha e_1^Ta$\\
+	$=2(\alpha^2-\alpha e_1^Ta)$\\
+	
+	
+	$2vv^Ta =2(a- \alpha e_1)( a- \alpha e_1)^Ta =2(a- \alpha e_1)( a^2- a^T\alpha e_1)$\\
+	
+	Substituting both the equation in H we get: \\
+	
+	$Ha=a- \frac{2(a- \alpha e_1)( \alpha^2- a\alpha^T e_1)}{2(\alpha^2-\alpha e_1^Ta)}$\\
+	
+	therefore $$=a- (a-\alpha e_1)= \alpha e_1$$\\
+	
+	Proved :   $Ha=\alpha e_1$
+		
+	
+	
+	\item \textbf{Determine the Householder transformation that annihilates all but the first entry of the vector $[1 1 1 1]^T.$ Specifically, if $$(I - 2\frac{vv^T}{v^Tv})
+	 \left [\begin{array}{c} 1\\1\\1\\1\\
+		\end{array}\right]= \left [\begin{array}{c} \alpha\\0\\0\\0\\
+		\end{array}\right], $$what are the values of $\alpha$ and $v$ ?}\\
+	
+	\textbf{Solution.}\\ 
+	
+	We have $a=[1 1 1 1]^T$ and we know $\alpha= \pm |||a||_2= \sqrt{1+1+1+1}=2$\\
+	$$ \alpha=2$$
+	
+	we know  $$v=a- \alpha e_1$$\\
+	$$\left [\begin{array}{c} 1\\1\\1\\1\\
+	\end{array}\right]-2\left [\begin{array}{c} 1\\0\\0\\0\\
+	\end{array}\right]=\left [\begin{array}{c} -1\\1\\1\\1\\
+	\end{array}\right]$$
+	
+	 $a=[-1 1 1 1]^T$\\
+	 
+	 To avoid the substraction we can take $\alpha$ to be positive and get :\\
+	 $v=a- \alpha e_1$\\
+	 $$\left [\begin{array}{c} 1\\1\\1\\1\\
+	 \end{array}\right]+2\left [\begin{array}{c} 1\\0\\0\\0\\
+	 \end{array}\right]=\left [\begin{array}{c} 3\\1\\1\\1\\
+	 \end{array}\right]$$
+	 
+	 $a=[3 1 1 1]^T$\\
+	
+
+
+
+\end{enumerate}
+
+
+\vspace{1cm}
+\subsection*{ \Large References}
+\begin{enumerate}
+	\item "Scientific Computing"- An Introductory Survey by Michael T. Health.
+	\item Classnotes from CS-210
+	\item https://fenix.tecnico.ulisboa.pt/downloadFile/3779576344458/singular-value-decomposition-fast-track-tutorial.pdf
+	\item https://www.youtube.com/watch?v=Ls2TgGFfZnU
+	\item https://www.mathsisfun.com/algebra/matrix-determinant.html
+	\item https://www2.cs.duke.edu/courses/fall13/cps274/notes/svd.pdf
+		\item http://stattrek.com/matrix-algebra/matrix-rank.aspx
+		\item https://rpubs.com/aaronsc32/inverse-matrices
+		\item http://pages.cs.wisc.edu/~amos/412/lecture-notes/lecture17.pdf
+		\item http://www.cs.cornell.edu/courses/cs4220/2014sp/CVLBook/chap7.pdf
+		\item http://mathfaculty.fullerton.edu/mathews/n2003/backsubstitution/BackSubstitutionMod/\\Links/BackSubstitutionMod\_lnk\_2.html
+		\item https://www.cise.ufl.edu/class/cot4501sp12/Homeworks/HW3Sol.pdf
+		\item http://www.seas.ucla.edu/~vandenbe/133A/lectures/chol.pdf
+		\item http://www.math.iit.edu/~fass/350FinalSol\_S08.pdf
+		\item https://www.coursehero.com/file/p5jspou/Hint\-You\-can-say\-that\-1\-\-2-1\-to\-simplify\-your\-floating\-point\-expressions\-2/
+		
+		\item https://www.cise.ufl.edu/class/cot4501sp12/Homeworks/HW2Sol.pdf
+		
+\end{enumerate}
+\end{document}

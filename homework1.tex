@@ -1,0 +1,286 @@
+\documentclass[12pt, oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}                		% See geometry.pdf to learn the layout options. There are lots.
+
+\usepackage{libertine}
+\usepackage{setspace}
+\usepackage{mathtools}
+                  		% ... or a4paper or a5paper or ... 
+%\geometry{landscape}                		% Activate for rotated page geometry
+%\usepackage[parfill]{parskip}    
+\usepackage{graphicx}				% Use pdf, png, jpg, or eps§ with pdflatex; use eps in DVI mode		
+
+\usepackage{amssymb}
+\usepackage{epsfig}
+\usepackage{url}
+
+%header and footer
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage{datetime}
+
+\begin{document}
+	
+\begin{titlepage}
+	\begin{center}
+	\line(1,0){400} \\
+    [0.25in]
+    \Huge{\bfseries CS 210, Spring- Homwork 1} \\
+    [2mm]
+    \line(1,0){400} \\
+    [3 cm]
+    
+    \textsc{\LARGE Kamalika Poddar} \\
+   
+  
+    \textsc{\LARGE University of California, Riverside} \\
+    [0.7cm]
+  \vspace*{7 cm}
+  \today
+    \end{center} 
+
+\end{titlepage}
+
+\newpage
+\vspace{2cm}
+
+\begin{center}
+\textbf{ \Large ANSWERS}\\
+\end{center}
+
+\vspace{0.5cm}
+\textbf{ \Large Errors and sources of error}\\
+
+\begin{enumerate}
+	\item \textbf{ What are the approximate absolute and relative errors in approximating Euler’s number e by each of the following quantities? }\\
+	
+	Absolute Error(Ae) = approximate value - true value\\
+	Relative error(Re) = absolute error/true value\\
+	Approximate Euler's number= 2.71828
+	\begin{enumerate}
+		\item \textbf{3:}\\
+		Ae= 3-2.71828=0.28171\\
+		Re= 0.28171/2.71828= 0.10363893 $\approx 10 \%$
+		\item \textbf{2.17:}\\
+		Ae= 2.71-2.71828= - 0.00828 \\
+		Re= - 8.28 x $10^{-3}$/2.71828= -0.0030460$\approx -0.3 \%$
+		\item \textbf{19/7:} This is equal to 2.714285\\
+		Ae= 2.714285-2.71828=- 0.0039942\\
+		Re= - 0.0039942/2.71828= - 0.0014694$\approx -0.1 \%$
+	\end{enumerate}
+
+\hspace{3cm}
+	\item \textbf{For each of the following statements, indicate whether the statement is true or false.}
+	\begin{enumerate}
+		\item \textbf{FALSE} -
+		A large absolute error implies a large relative error. 
+		\item \textbf{TRUE}-  Truncation error is due to approximations such as truncating an infinite series while rounding error is due to inexactness in the representation of real numbers. 
+		\item \textbf{TRUE}- Computational error consists of the difference between the exact and the approximated functions calculated on the same inexact input data.
+		\item \textbf{FALSE}- \^f(x) = x can be used to approximate f(x) = sin(x) for large values of x.
+	\end{enumerate}
+\newpage
+\textbf{ \Large Conditioninig and stability}\\
+      \item \textbf{For each of the following statements, indicate whether the statement is true or false.}
+      	\begin{enumerate}
+      	\item \textbf{FALSE}
+      	Using higher-precision arithmetic will make an ill-conditioned problem better conditioned.  
+      	\item \textbf{TRUE} A stable algorithm applied to a well-conditioned problem necessarily produces an accurate solution. 
+      	\item \textbf{FALSE} - A condition number of 1 means the problem is ill-conditioned.   
+      	
+      \end{enumerate}
+  
+  \hspace{3cm}
+    	\item \textbf{Consider the function $f:R -> R$ defined by $f(x,y)= x-y$. Measuring the size of the input $(x,y)$ by $|x| + |y|$, and assuming that $|x| + |y| \approx 1 $ and $x-y \approx \epsilon$, show that $cond(f) \approx 1/ \epsilon$. What can you conclude about the sensitivity of substraction?}\\
+    	
+    	
+    	
+    	Condition number$= \frac{|(f(\hat {x})- f(x))/ f(x)| }{|(\hat{x }-x )/x|}$ $= \frac{|(\hat{y}- y)/ y| }{|(\hat {x} -x )/x|}$$= \frac{|(\Delta y)/ y| }{|(\Delta x )/x|}$ \\
+    	
+    	Condition number= $\frac{ |Relative forward error| }{|Relative backward error|}$\\
+    	
+    	When a function is evaluated by a differential function : $ f:R ->R$, the condition number so obtained by substituting relative forward and backward error on two variable x and y  is:\\
+    	
+    	Condition number $\approx |\frac{f(x + \Delta x, y + \Delta y) - f(x,y) / f(x,y)} { |\Delta x| + | \Delta y|/|x| + |y|}|$\\
+    	
+    	Substituting $f(x,y)= x-y$ , $|x| + |y| \approx 1 $ and $x-y \approx \epsilon$\\
+    	
+    	Condition number $\approx |\frac{f(x + \Delta x, y + \Delta y) - \epsilon / \epsilon} { |\Delta x| + | \Delta y|/1}|$\\
+    	
+    \hspace{3cm}	$\approx |\frac{x + \Delta x -y - \Delta y - \epsilon / \epsilon} { |\Delta x| + | \Delta y|/1}|$\\
+    	
+     \hspace{3cm}	$\approx |\frac{ \Delta x  - \Delta y  / \epsilon} { |\Delta x| + | \Delta y|/1}|$\\
+     
+       \hspace{3cm}	$\approx |\frac{1}{\epsilon}|\frac{ |\Delta x  - \Delta y| } { |\Delta x| + | \Delta y|}$\\
+       
+       So for absolute number, we have\\
+       
+         \hspace{3cm}	$\approx |\frac{1}{\epsilon}|\frac{ |\Delta x | +| \Delta y| } { |\Delta x| + | \Delta y|} = \frac{1}{\epsilon}$\\
+         
+         Therefore we could prove that the condition number of the function is $\frac{1}{\epsilon}$.\\
+         We conclude that the sensitivity of substraction is more as the distance between the operands decreases.\\
+         
+         \hspace{4cm}
+         
+         
+    	
+    	
+\textbf{ \Large Floating point}\\	
+		\item \textbf{A floating point number system is characterized by four integers: the base $\beta$, the precision p, and the lower and upper limits L and U of the exponent range.}
+		\begin{enumerate}
+		\item  If $\beta$ = 10, what are the smallest values of p and U, and the largest value of L, such that both 12.3456 and 0.0012 can be represented exactly in a normalized floating-point system?\\
+		 
+		 Numbers represented in a normalized system are:\\
+		 $12.3456= 1.23456 * 10^1$\\
+		 $0.0012= 1.2 * 10^{-3}$\\
+		 
+		 Smallest value of precision (p) is = 6\\
+		 Lower limit(L)= -3\\
+		 Upper limit(U)= 1\\
+		 
+		   \hspace{3cm}
+		\item How would your answer change if gradual underflow is allowed?\\
+		
+		If we denormalize 0.0012, representing six digits of precision, we have $0.00012 *10^1$, L=1, U= 1\\
+		Further increasing Precision to 7, we have $0.000012*10^2$, L=1 and U=2.  
+		So with the increase in precision there is a increase in U.
+	\end{enumerate}
+
+ \hspace{3cm}
+	\item \textbf{Between an adjacent pair of nonzero IEEE single precision real numbers, how many IEEE doule precision numbers are there?}\\
+	
+	In a floating point number the next adjacent number obtained will the increment of its least significant bit by 1.
+	 For single precision number we have precision as 24 bits and two adjacent numbers are represented as- \\
+	 $1.23.......3330  * 2^e$ and $1.23.......3331 *2^e$ , there are 23 bits after the leftmost bit(1).\\
+	 
+	 For a double precision number there are 53 bits precision but between two adjacent number we have 52 bits precision.\\
+	 A double precision number has 29 additional bits for mantissa more  than single precision bit.
+	 Therefore between two adjacent pair of a single precision number, we have 29 less significant bits of a double precision number.\\
+	 The total number of double precision numbers  excluding the case when all the additional numbers are zero:\\ $2^{29} -1 = 536870911$.
+	
+	 \hspace{3cm}
+	\item \textbf{For each of the following statements, indicate whether the statement is true or false.}
+	\begin{enumerate}
+		\item \textbf{FALSE}-
+		If two real numbers are exactly represented as floating point numbers, then the result of a arithmetic operation on them will also be represented as a floating point number.
+		\item \textbf{FALSE}- Floating-point numbers are distributed uniformly throughout their range.
+		\item \textbf{TRUE}- Floating point arithmetic is commutative, but not associative.
+		\item \textbf{FALSE}- The denormalized floating point representation of a number is unique.
+		\item \textbf{FALSE}- Addition of two positive floating point numbers may cause underflow.
+		\item \textbf{TRUE}- Division of two positive floating point numbers may cause overflow.
+		\item \textbf{FALSE} -In a normalized floating point system, the representation of a machine number is not unique.
+		
+	\end{enumerate}
+	
+	\newpage
+	
+	\item \textbf{ a.} Given:\\
+	$V= 0.5m^3$,  $R= 8.31 J mol^{-1} K^{-1}$\\
+	$PV=nRT \implies n=\frac{PV}{RT}$\\
+	
+	Relative forward error for Pressure= $\frac{f(x+\Delta x ) -f(x)} { f(x)}$   \\ 
+	
+	\hspace{6cm}= $|\frac{\frac{(P+\Delta P)V }{RT}-\frac{(PV) }{RT}} { \frac{(PV) }{RT}}|$  \\
+	
+		\hspace{6cm}= $|\frac{\frac{(PV+\Delta PV -PV }{RT} } { \frac{(PV) }{RT}}|$  \\
+		
+		\hspace{6cm}=$\frac{\Delta P}{P}= \epsilon$\\
+			
+		Relative forward error for Temperature= $\frac{f(x+\Delta x ) -f(x)} { f(x)}$   \\ 
+			
+		\hspace{7cm}= $|\frac{\frac{PV }{R(T+ \Delta T)}-\frac{(PV) }{RT}} { \frac{(PV) }{RT}}|$  \\
+			
+		\hspace{7cm}= $|\frac{\frac{PVRT -PVRT - PVR\Delta T}{R*RT(T+ \Delta T)}} { \frac{(PV) }{RT}}|$  \\
+		
+		\hspace{7cm}= $|\frac{\frac{- PVR\Delta T}{R*RT(T+ \Delta T)}} { \frac{(PV) }{RT}}|$  \\
+				
+		\hspace{7cm}=$\frac{\Delta T}{T + \Delta T}$\\
+		
+		As T is small, $\Delta T$ will be very very small. Therefore error equals to :
+		$ \frac{\Delta T}{T }= \epsilon $\\
+		Total relative forward error for the amount of gas is $\frac{\Delta n}{n} $= $\epsilon + \epsilon=2 \epsilon$\\
+		
+		\textbf{b.}   To find the absolute and relative errors:\\
+			$	n= PV/RT=100 *0.5/ 8.31 *300 = \textbf{0.0200}$ moles\\	
+		\begin{itemize}
+			\item    	$\Delta n$= $\frac{(P+ \epsilon P) V}{R (T+ \epsilon T)}= 101* 0.5 / 8.31 * 300.5=\textbf{0.02022 moles}$\\
+			
+			Absolute error: ${0.02022- 0.0200}= 2.2*10^{-4} $\\
+			
+			Relative error: $\frac{0.02022- 0.0200}{0.0200} = 0.011 \approx \textbf{1.1\%}$
+			
+			\item  $\Delta n$= $\frac{(P-\epsilon P) V}{R (T-\epsilon T)}= 99* 0.5 / 8.31 * 299.5=\textbf{0.0198887 moles}$\\
+			
+			Absolute error: ${0.0198887- 0.0200}= -3.31256*10^{-4} $\\
+			
+			Relative error: $\frac{-3.31256*10^{-4} }{0.0200} = -0.01656 \approx \textbf{-1.6\%}$
+			
+			\item  $\Delta n$= $\frac{(P+ \epsilon P) V}{R (T- \epsilon T)}= 101* 0.5 / 8.31 * 299.5=\textbf{0.02029 moles}$\\
+			
+			Absolute error: ${0.02029 - 0.0200}= 2.905*10^{-4} $\\
+			
+			Relative error: $\frac{2.905*10^{-4}}{0.0200} = 0.0145 \approx \textbf{1.4\%}$
+			
+			\item  $\Delta n$= $\frac{(P-\epsilon P) V}{R (T+\epsilon T)}= 99* 0.5 / 8.31 * 300.5=\textbf{0.0198225 moles}$\\
+			
+			Absolute error: ${0.0198225- 0.0200}= -1.7744*10^{-4} $\\
+			
+			Relative error: $\frac{-1.7744*10^{-4}}{0.0200} = -0.00872 \approx \textbf{0.8\%}$\\
+			
+			\textbf{The worst absolute and relative error is obtained when $P=P+ \epsilon P$ and $T= T-\epsilon T$.}
+			
+		\end{itemize}
+	
+		
+		\item Below table shows the obtained Gaussian functions. The programming language I used to perform the calculation is Python and I have attached the code with the report. \\
+		
+		 \begin{center}
+			\begin{tabular}{ c|c| c| c }
+				&$\mu=0$ & $\mu=1$& $\mu=2$ \\ 
+				\hline
+				$\sigma= 0.01$ & 4.7463 & 0.000& 0.00\\  
+				\hline
+					$\sigma= 0.10$ & 0.8110 & 1.025 & 7.36 \\  
+				\hline
+					$\sigma= 1.00$ & 1.00 & 0.999 & 0.999 \\  
+				\hline  
+					$\sigma= 10.0$ & 1.00 &1.000 &1.000 \\  
+				\hline  
+			\end{tabular}
+		\end{center}
+	The obtained results are shown as:
+	\begin{flushleft}
+			\includegraphics[width=15cm, height=15cm]{gaussian}
+	\end{flushleft}
+
+	Multivariate version of Gaussian distribution results are obtained manually:\\
+	 \begin{center}
+		\begin{tabular}{ c|c| c }
+			&$k=2$ & $k=3$ \\ 
+			\hline
+			$\sigma= 0.1$ & $3.3911* 10^{-3}$& $1.3536 * 10^{-3}$\\  
+			\hline
+			$\sigma= 1.0$ & 0.09643 & 0.03850\\  
+			\hline
+			$\sigma= 2.0$ &  0.087560& 0.03496 \\  
+			\hline  
+		 
+		\end{tabular}
+	\end{center}
+
+\end{enumerate}
+
+
+
+
+\vspace{1cm}
+\textbf{ \Large References}\\
+\begin{enumerate}
+	\item " Scientific Computing"- An Introductory Survey by Michael T. Health.
+	\item Classnotes from CS-210
+	\item https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.romberg.html
+	\#scipy.integrate.romberg
+	\item http://lagrange.univ-lyon1.fr/docs/scipy/0.17.1/generated/scipy.stats.multivariate\_
+	normal.html
+	\item https://stackoverflow.com/questions/14873203/plotting-of-1-dimensional-gaussian-distribution-function
+\end{enumerate}
+\end{document}

@@ -1,0 +1,688 @@
+\documentclass[12pt, oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}                		% See geometry.pdf to learn the layout options. There are lots.
+
+\usepackage{libertine}
+\usepackage{setspace}
+\usepackage{mathtools}
+                  		% ... or a4paper or a5paper or ... 
+%\geometry{landscape}                		% Activate for rotated page geometry
+%\usepackage[parfill]{parskip}    
+\usepackage{graphicx}				% Use pdf, png, jpg, or eps§ with pdflatex; use eps in DVI mode		
+
+\usepackage{amssymb}
+\usepackage{epsfig}
+\usepackage{url}
+
+%header and footer
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage{datetime}
+
+\begin{document}
+	
+\begin{titlepage}
+	\begin{center}
+	\line(1,0){400} \\
+    [0.25in]
+    \Huge{\bfseries CS 210, Spring- Homwork 2} \\
+    [2mm]
+    \line(1,0){400} \\
+    [3 cm]
+    
+    \textsc{\LARGE Kamalika Poddar} \\
+ 
+  
+    \textsc{\LARGE University of California, Riverside} \\
+    [0.7cm]
+  \vspace*{7 cm}
+  \today
+    \end{center} 
+
+\end{titlepage}
+
+\newpage
+\vspace{2cm}
+
+\begin{center}
+\textbf{ \Large ANSWERS}\\
+\end{center}
+
+\vspace{0.5cm}
+\subsection*{Matrix Algebra}
+
+\begin{enumerate}
+	\item \textbf{  If $\vec{u}$ and $\vec{v}$ are $m-$vectors, the matrix $A = I+\vec{u}\vec{v}^T$ is known as a rank-one
+		pertubation of the identity.  Show that if $A$ is nonsingular, then its inverse has the form $A^{-1} = I + \alpha
+		\vec{u} \vec{v}^T$ for some scalar $\alpha$, and give an expression for $\alpha$.  For what $\vec{u}$ and $\vec{v}$ is
+		$A$ singular?  If it is singular, what is null($A$)?}\\
+	
+	\textbf{Solution.}\\
+	
+	First we show that if A is non-singular then its inverse will take the form $A^{-1}= I + \alpha uv^T$.\\
+	$AA^{-1} =I$   
+	Therefore:\\
+
+	\hspace{2cm}	$=(I+uv^T)(I+\alpha uv^T) $\\
+	
+	\hspace{2cm}$=I+uv^TI+\alpha uv^TI+ \alpha uv^T uv^T$\\
+	
+	\hspace{2cm} $= I +uv^T +\alpha uv^T+ \alpha uv^T uv^T$\\
+	
+	\hspace{2cm} $= I +uv^T +\alpha uv^T(1+uv^T)$\\
+	
+	\hspace{2cm} $= I +uv^T(1+\alpha +\alpha uv^T)$\\
+	
+	For the above eqaution to become I then $(1+\alpha +\alpha uv^T)$has to zero.
+	Therefore: \\
+	
+	\hspace{2cm}$\implies(1+\alpha +\alpha uv^T)=0$\\
+	
+	\hspace{2cm}$\implies \alpha(1+ uv^T)=-1$\\
+	
+	\hspace{2cm}$\implies \alpha=\frac{-1}{(1+ uv^T)}$\\
+	
+	For A to be singular, then let $uv^T=-1$ then,\\
+	$Au=(I+uv^T)u$\\
+	$=u+uv^Tu$\\
+	$=u-u$\\
+	$=0$\\
+	Hence we can say A is singular for $uv^T=-1$, then $null(A)=span(u)$. Now if we pludge the value of $uv^T=-1$ into the above equation of $\alpha$ then it leads to an undefined number, which proves the singularity of A.\\
+
+	
+	\item \textbf{Given that $A \in \mathbb{R}^{nxn}$ is invertible.}
+	\begin{enumerate}
+		\item \textbf{Show that $(A^T)^{-1}=(A^{-1})^T$.}\\
+		
+		\textbf{Solution.}
+		
+		Let $A_{ij}$ be the component of A in the $i^{th}$ row and $j^{th}$ column.By definition of a transpose, we have: $ A_{ij}=A_{ji}^T. $ Let $X=(A^T)^{-1}$. Then\\
+		$$
+		X_{ij}= \sum_{k=1}^{n}A_{ik}
+		$$
+		The component of $X^{-1}$ in the $i^{th}$row and $j^{th}$ is
+		$$
+		X_{ij}^{-1}= \sum_{k=1}^{n}(A_{ik})^{-1}=\sum_{k=1}^{n}(A_{ki}^T)^{-1}=\sum_{k=1}^{n}(A_{ki}^{-T})=\sum_{k=1}^{n}(A_{ki}^{-1})^{T}.
+		$$
+		Therefore we could prove that $(A^T)^{-1}=(A^{-1})^T$.\\
+		
+		
+		\item  \textbf{Show that $(AB)^{-1} = B^{-1}A^{-1}$.}\\
+		
+		\textbf{Solution.}
+		
+		Let C be the inverse of a matrix AB, such that (AB)C=C(AB)=I.  Therefore we verify that 
+		$C=B^{-1}A^{-1}$ satisfies the condition:\\
+		$$
+		(AB)C=(AB)(B^{-1}A^{-1})= A(BB^{-1})A^{-1}=A(I)A^{-1}=AA^{-1}=I
+		$$
+		$$
+		C(AB)=(B^{-1}A^{-1})(AB)= B^{-1}(A^{-1}A)B=B^{-1}(I)B=B^{-1}B=I
+		$$
+		Therfore $(AB)^{-1} = B^{-1}A^{-1}$\\
+		
+	\end{enumerate}
+	\item \textbf{A matrix $A \in \mathbb{R}^{nxn}$ is idempotent if it satisfies $A^2 =A$.}
+	\begin{enumerate}
+		\item \textbf{Suppose $B \in \mathbb{R}^{mxk}$ is constructed so that $ B^T B$ is invertible. Show that the matrix  $B(B^T B)^{-1} B^T$ is idempotent.}\\
+		
+		\textbf{Solution.}\\
+			To show $B(B^TB)^{-1}B^T$ is idempotent, we try to proof  $(B(B^TB)^{-1}B^T)^2=B(B^TB)^{-1}B^T$.\\
+		
+		$(B(B^TB)^{-1}B^T)^2=[B(B^TB)^{-1}B^T][B(B^TB)^{-1}B^T]$\\
+		
+		\hspace{3cm}$=[B(B^TB)^{-1}(B^TB)(B^TB)^{-1}B^T]$  \\
+		
+			\hspace{3cm} we know $(B^TB)^{-1}(B^TB)=1$ therefore\\
+		
+		\hspace{3cm}$=[B(1)(B^TB)^{-1}B^T]$  \\	
+		
+		Hence we could prove that $=[B(1)(B^TB)^{-1}B^T]$ is idempotent.\\
+		
+		
+		\item  \textbf{ If A is idempotent, show that $I_{nxn}-A$ is also idempotent.}\\
+		
+		\textbf{Solution.}\\
+		To prove $I-A$ is idempotent, we show that $(I-A)^2=I-A$\\
+		$(I-A)^2=(I-A)(I-A)$\\
+		
+		\hspace{2cm}$=II-AI-IA+AA$\\
+		
+		\hspace{2cm}$=I-A-A+A^2$\\
+			
+		\hspace{2cm}$=I-2A+A^2$      as $A^2=A$, then we have the equation as:\\
+		
+		\hspace{2cm}$=I-2A+A$\\
+		
+		\hspace{2cm}$=I-A$\\
+		Therefore we could prove that $(I-A)^2=I-A$ and $=I-A$ is idempotent matrix.\\
+		
+		\item  \textbf{ If A is idempotent, show that $ \frac{1}{2}I_{nxn}-A$ is invertible and give an expression for its inverse.} \\
+		
+		\textbf{Solution.}\\
+		
+		A matrix is invertible only when the product of itself and inverse result in I i.e, $AA^{-1}=I$. Here $A=(\frac{1}{2}I-A)$ and for now let's consider $A^{-1}=(\frac{1}{2}I-A)$. Therefore:\\
+		
+		\hspace{2cm} $=(\frac{1}{2}I-A)(\frac{1}{2}I-A)$\\
+		
+		
+		\hspace{2cm}$=\frac{1}{4}II-\frac{1}{2}AI-\frac{1}{2}IA+AA$\\
+		
+		\hspace{2cm}$=\frac{1}{4}I-A+A^2$\\
+		
+		\hspace{2cm}$=\frac{1}{4}I-A+A$      as $A^2=A$, then we have the equation as:\\
+		
+		\hspace{2cm}$=\frac{1}{4}I$\\
+		
+		So the inverse of a matrix $A$ will be four times its matrix. Therefore\\ $A^{-1}=4(\frac{1}{2}I-A)$
+		
+	\end{enumerate}
+    \end{enumerate}
+
+\subsection*{Vector and matrix norms}
+\vspace{1cm}
+\begin{enumerate}
+\setcounter{enumi}{3}
+
+\item \textbf{Let $\vec{x} \in \mathbb{R}^n$. Two vector norms, $||\vec{x}||_a$ and $||\vec{x}||_b$, are \emph{equivalent} if
+$\exists \, c,d \in \mathbb{R}$ such that
+$$c||\vec{x}||_b \leq ||\vec{x}||_a \leq d||\vec{x}||_b.$$
+Matrix norm equivalence is defined analogously to vector norm equivalence, i.e., $||\cdot||_a$ and $||\cdot||_b$ are
+equivalent if $\exists \, c,d$ s.t. $c||A||_b \leq ||A||_a \leq d||A||_b$.}
+\begin{enumerate}
+	\item \textbf{Let $\vec{x} \in \mathbb{R}^n, \, A \in \mathbb{R}^{n \times n}$.  For each of the following, verify the inequality and give an example of a non-zero vector or matrix for which the
+	bound is achieved (showing that the bound is tight):}\\
+	\vspace{1cm}
+
+	\begin{enumerate}
+		
+		\item$||\vec{x}||_\infty \leq ||\vec{x}||_2$\\
+		
+		\textbf{Solution.}\\
+		
+		From $\infty$- norm:\\
+		$||\vec{x}||_\infty
+		= \max_{1\leq i \leq n} |x_i|\\
+		= (\max_{1\leq i \leq n} |x_i|^2)^{1/2} \\
+		\leq  (\sum_{i=1}^{n} |x_i|^2)^{1/2}\\
+		=||x||_2 $\\
+		
+		An example for the vector is $||\vec{x}||_\infty \leq ||\vec{x}||_2$ is given by $x = (1,0,...0)^T$\\
+		
+		
+		\item $||\vec{x}||_2 \leq \sqrt{n} ||\vec{x}||_\infty$\\
+		
+		\textbf{Solution.}\\
+		
+		From 2-norm:\\
+		$||\vec{x}||_2
+		=  (\sum_{i=1}^{n} |x_i|^2)^{1/2}\\
+		\leq (\sum_{i=1}^{n} \max_{1\leq i \leq n} |x_j|^2)^{1/2}\\
+		= (n \max_{1\leq i \leq n} |x_j|^2)^{1/2}\\ 
+		=\sqrt{n}||x||_\infty $\\
+		
+		An example for $||\vec{x}||_2 \leq \sqrt{n} ||\vec{x}||_\infty$ is given by $x=(1,1,...,1)^T$\\
+		
+		\item $||A||_\infty \leq \sqrt{n} ||A||_2$\\
+		
+		\textbf{Solution.}\\
+		
+		We know that $||A||_\infty =\max_{||x||_{\infty}=1} ||Ax||_\infty$.\\
+		Let $y=argmax_{||x||_{\infty=1}}||Ax||_\infty$\\
+		
+		Substituting: $||x||_\infty= ||x||_2$,  \ \ \
+		 $||\vec{x}||_2 \leq \sqrt{n} ||\vec{x}||_\infty$, \ \ \ \ $||x||_2= (\sum_{i=1}^{n} |x_i|^2)^{1/2}$, we get the below equation-\\
+		
+		$||A||_\infty =||Ay||_\infty \leq ||Ay||_2= \frac{||Ay||_2}{||y||_\infty} \leq \frac{||Ay||_2}{\frac{1}{\sqrt{n}}||y||_\infty}=\frac{\sqrt{n}||Ay||_2}{||y||_\infty} \leq \sqrt{n}||A||_2$\\
+		
+		To find the example we have to write down the conditions that make the inequalities, equal. To do so we have the following conditions:-\\
+		\begin{itemize}
+			\item $Ay=(\alpha,0)^T$ for some $\alpha$
+			\item $y=(1,1)^T$
+			\item $||A||_2=\frac{||A||_2}{||y||_2}$
+			\item $||A(\begin{array}{c}1\\1
+			\end{array})||_\infty= ||A||_\infty=\alpha$
+		\end{itemize}
+		We can construct a matrix a by its largest singular value as:\\
+		$A(\begin{array}{c}\frac{1}{\sqrt{2}}\\\frac{1}{\sqrt{2}}
+		\end{array})= u_1 \sigma_1$\\
+		
+		Using the above conditions we get:\\
+		$A(\begin{array}{c}\frac{1}{\sqrt{2}}\\\frac{1}{\sqrt{2}}
+		\end{array})= u_1 \sigma_1= (\begin{array}{c}\frac{\alpha}{\sqrt{2}}\\0
+		\end{array})$\\
+		
+		Therefore- $u_1=(\begin{array}{c}1\\0
+		\end{array}), \sigma=(\frac{\alpha}{\sqrt{2}})>0,  A= \frac{\alpha}{\sqrt{2}}(\begin{array}{c}1\\0
+		\end{array})(\begin{array}{cc}\frac{\alpha}{\sqrt{2}}&\frac{\alpha}{\sqrt{2}}
+		\end{array})$\\
+		
+		
+		\item $||A||_2 \leq \sqrt{n} ||A||_\infty$\\
+		
+		\textbf{Solution.}\\
+		
+		Let $y=argmax_{||x||_{2=1}}||Ax||_2$\\
+		
+		Substituting: $||\vec{x}||_2 \leq \sqrt{n} ||\vec{x}||_\infty$,\ \ \ $||x||_\infty= ||x||_2$,  \ \ \ , we get the below equation:\\
+		$||Ay||_2 \leq \sqrt{n}||Ay||_\infty =\sqrt{n}||y||_\infty \frac{||Ay||_\infty}{||y||_\infty}
+		 \leq\sqrt{n}||y||_2\frac{||Ay||_\infty}{||y||_\infty}
+		  =\frac{\sqrt{n}||Ay||_\infty}{||y||_\infty} \leq \sqrt{n}||A||_\infty$\\
+		  
+		  To achieve equality of all the inequality above we impose certain conditions to find the example. Below are those conditions:\\
+		  
+			\begin{itemize}
+			\item $Ay=(1,1)^T$ 
+			\item $y=(1,0)^T$
+			\item $\frac{||A||_\infty}{||y||_\infty}=||A||_\infty$
+		\end{itemize}
+	And the matrix that satisfies the above conditions is :\\
+	$A= (\begin{array}{cc}
+	1&0\\1&0
+	\end{array})$
+		
+	\end{enumerate}
+	
+	\item \textbf{For each of the following statements, indicate whether the statement is true or false.}
+	\begin{itemize}
+		\item 	\textbf{TRUE}: For a symmetric matrix A, it is always the case that $||A||_1 = ||A||_\infty$ 
+		\item \textbf{FALSE} : If x is any n-vector, then $||x||_1 \leq ||x||_\infty$ 
+		\item \textbf{FALSE}: The norm of a singular matrix is zero.
+		\item \textbf{FALSE} If $||A|| = 0$, then $A=0$
+		\item\textbf{TRUE} If A=0, then $||A|| = 0$
+		\item \textbf{TRUE} $||A||_1 = ||A^T||_\infty$
+	\end{itemize}
+
+	
+	
+	
+\end{enumerate}
+\end{enumerate}
+
+\subsection*{Sensitivity and conditioning}
+\begin{enumerate}
+\setcounter{enumi}{4}
+\item \textbf{What is the condition number of the following matrix using the 1-norm?}
+$$
+A = \left(\begin{array}{ccc} 4 & 0 & 0 \\ 0 & -6 & 0 \\ 0& 0 & 2 \end{array} \right)
+$$
+
+\textbf{Solution.}\\
+
+First we find the inverse of A:\\
+$A^{-1}=\frac{Ajd|A|}{det|A|}$\\
+$$
+A = \left(\begin{array}{ccc} 4 & 0 & 0 \\ 0 & -6 & 0 \\ 0& 0 & 2 \end{array} \right)
+$$\\
+$det|A|= 4(-6*2-0)-0+0=-48$\\
+$$
+A^T = \left(\begin{array}{ccc} 4 & 0 & 0 \\ 0 & -6 & 0 \\ 0& 0 & 2 \end{array} \right)
+$$\\
+$$
+Adj(A)= \left(\begin{array}{ccc} -12 & 0 & 0 \\ 0 & 8 & 0 \\ 0& 0 & -24 \end{array} \right)
+$$\\
+$$
+A^{-1}= (\frac{1}{-48})\left(\begin{array}{ccc} -12 & 0 & 0 \\ 0 & 8 & 0 \\ 0& 0 & -24 \end{array} \right)
+$$\\
+ $$
+A^{-1}= \left(\begin{array}{ccc} 0.25 & 0 & 0 \\ 0 & 0.166& 0 \\ 0& 0 & 0.5\end{array} \right)
+$$\\
+Therefore: $cond(A)=||A||. ||A^{-1}||$\\
+
+The maximum absolute column and row sums, respectively are:
+
+$||A||_1=6$ and $||A||_\infty=6$\\
+$||A^{-1}||_1=0.5$ and $||A^{-1}||_\infty=0.5$\\
+
+Thus the condition number is:\\
+ $cond_1(A)= ||A||_1. ||A^{-1}||_1= 6*0.5=3$\\
+$cond_\infty(A)= ||A||_\infty. ||A^{-1}||_\infty= 6*0.5=3$
+
+\item \textbf{Suppose that the $n \times n$ matrix $A$ is perfectly well-conditioned, i.e., cond(A) = 1.  Which of the following matrices would then necessarily share this same
+property?}
+\begin{enumerate}
+	\item  \textbf{Yes}. $cA$, where $c$ is any nonzero scalar- constants cancel in the condition number, therefore $||cA||=c||A||$ and $(cA)^{-1}=\frac{A^{-1}}{c}$
+	\item \textbf{No}. $DA$, where $D$ is a nonsingular diagonal matrix- The  condition number of AD depends on the ratio of the maximum diagonal entry and the minimum diagonal entry.
+	\item \textbf{Yes}.  $PA$, where $P$ is any permutation matrix- Permutation matrix has a condition number 1. Given $||PA|| \leq ||P||||A||$ we have $cond(PA)=1$
+	\item \textbf{No}. $BA$, where $B$ is any nonsingular matrix- A is a identity matrix but B is a non-singular matrix.
+	\item \textbf{Yes}. $A^{-1}$, the inverse of $A$- Both has the same condition number.
+	\item $A^T$, the transpose of $A$- For this we can see if the matrix A is equal to (1,0,0...0) then it's transpose will also be well conditioned for this particular type but this is not the case for the other types. So the answer can be both Yes or No.
+\end{enumerate}
+
+
+\end{enumerate}
+
+
+
+\subsection*{LU Factorization and Gaussian Eliminiation}
+
+\begin{enumerate}
+\setcounter{enumi}{6}
+\item \textbf{Solve the following system of equations using Gaussian elimination, writing the corresponding elimination matrix of each step.
+$$
+A = \left(\begin{array}{cc} 2 & 4\\ 3 & 5 \end{array}\right)
+\left(\begin{array}{c} x\\ y \end{array}\right)
+=\left(\begin{array}{c} 2\\ 4 \end{array}\right)
+$$}
+\textbf{Solution.}\\
+
+First we find Upper triangle matrix of matrix A.\\
+
+$$
+A = \left(\begin{array}{cc} 2 & 4\\ 3 & 5 \end{array}\right)
+\left(\begin{array}{c} x\\ y \end{array}\right)
+=\left(\begin{array}{c} 2\\ 4 \end{array}\right)
+$$\\
+
+We multiply two time row two and subtract it from three times row one  and store the result in row two. Below are the operations.\\
+$$
+MA =U\\ 
+$$
+$$
+=>\left(\begin{array}{cc} 1&0\\ 3& -2 \end{array}\right)
+\left(\begin{array}{cc} 2 & 4\\ 3 & 5 \end{array}\right)
+=\left(\begin{array}{cc} 2 &4\\ 0&2 \end{array}\right)
+$$\\
+
+ we know $Uxy=b$, so therefore\\
+ $$
+ \left(\begin{array}{cc} 2 &4\\ 0&2 \end{array}\right)
+ \left(\begin{array}{c} x\\ y \end{array}\right)
+ =\left(\begin{array}{c} 2\\ 4 \end{array}\right) 
+ $$
+ $2x+4y=2$ and  $0x+2y=4$\\
+ 
+ $2y=4$\\
+ $y=2$\\
+Substituiting y in the other equation, we get:\\
+$ 2x+4*2=2$ \\
+$ 2x+8=2$ \\
+$2x=-6$\\
+$x=-3$\\
+
+
+
+\item \textbf{Under what circumstances does a small residual vector $r = b - A\hat{x}$ imply that x is an accurate solution to the linear system $Ax=b$?}\\
+
+\textbf{Solution.}\\
+
+If A is nonsingular then the error is$||\Delta x||=||\hat{x} -x||=0$ only if $||r||=0$ but these quantities are not necessarily small.If $Ax=b$ is multiplied by an arbitrary non-zero constant, then the solution is unaffected but the residual is multiplied by the same factor. Therefore the size of residual depends on the size of problem data and solution. Relative residual is defined as $\hat{x} = ||r||/(||A||.||\hat{x}||)$\\
+
+
+We know $x=A^{-1}b$ , $AA^{-1}=I$ and $r = b - A\hat{x}$   therfore we can relate the residual to error by:\\
+
+$||\Delta x||=||\hat{x} -x||=||AA^{-1}\hat{x} - A^{-1}b|| = ||A^{-1}(A\hat{x} - b)|| = ||-A^{-1}r||  \leq ||A^{-1}|| .||r|| $ \\
+
+Dividing both side by $||\hat{x}|| $ and using the defination of $cond(A)$, we get the below result.\\
+
+$\frac{||\Delta x||}{||\hat{x}|| } \leq cond(A) \frac{||r||}{||A||.||\hat{x}||}$\\
+
+Therfore we can understand that a small relative residual implies a small relative error in the solution when only when A is well conditioned.
+
+
+\item \textbf{Suppose a square matrix $ M \in \mathbb{R}^{nXn}$ is written in block form as  
+$$
+\begin{pmatrix}
+A& B\\
+C & D
+\end{pmatrix}
+$$
+where $A \in \mathbb{R}^{kXk}$ is square and invertible.}
+ 
+\begin{enumerate}
+	\item \textbf{Show that we can decompose M as the below product where I  denotes an identity matrix.
+	$$
+	M = \left(\begin{array}{cc} I & 0\\ CA^{-1} & I \end{array}\right)
+	\left(\begin{array}{cc} A & 0\\ 0& D-CA^{-1}B \end{array}\right)
+	\left(\begin{array}{cc} I & A^{-1}B \\0& I \end{array}\right)
+	$$}
+\textbf{Solution.}\\
+
+Given:   
+$$
+M= \begin{pmatrix}
+A& B\\
+C & D
+\end{pmatrix} = LU
+$$ and we know that 
+$$
+L= \left(\begin{array}{cc} 1 & 0\\ L_{21} & 1 \end{array}\right) , U=
+\left(\begin{array}{cc} U_{11} & U_{12}\\ 0& U_{22} \end{array}\right)
+$$ 
+
+Therefore
+$$
+LU= \left(\begin{array}{cc} 1 & 0\\ L_{21} & 1 \end{array}\right) \left(\begin{array}{cc} U_{11} & U_{12}\\ 0& U_{22} \end{array}\right)= \begin{pmatrix}
+U_{11}&  U_{12}\\
+L_{21}U_{11} & L_{21}U_{12}+U_{22} 
+\end{pmatrix} 
+=\begin{pmatrix}
+A& B\\
+C & D
+\end{pmatrix} 
+$$ 
+We get:\\
+
+\hspace{3cm}$U_{11}=A,\hspace{4cm}
+U_{12}=B$\\
+
+\hspace{3cm}$L_{21}U_{11}=C,\hspace{3cm}L_{21}= CA^{-1}$\\
+
+\hspace{3cm}$L_{21}U_{12}+U_{22} =D, 
+\hspace{2cm}U_{22} =D-CA^{-1}B\\
+$\\
+Substituiting the above values in L and U, we get\\
+$$
+L= \left(\begin{array}{cc} 1 & 0\\ CA^{-1}& 1 \end{array}\right) , U=
+\left(\begin{array}{cc}A & B\\ 0& D-CA^{-1}B \end{array}\right)
+$$ 
+$$
+M= \left(\begin{array}{cc} 1 & 0\\ CA^{-1}& 1 \end{array}\right) 
+\left(\begin{array}{cc}A & B\\ 0& D-CA^{-1}B \end{array}\right) \hspace{3cm}---------(i)
+$$ \\
+
+To proof:\\
+$$
+M = \left(\begin{array}{cc} I & 0\\ CA^{-1} & I \end{array}\right)
+\left(\begin{array}{cc} A & 0\\ 0& D-CA^{-1}B \end{array}\right)
+\left(\begin{array}{cc} I & A^{-1}B \\0& I \end{array}\right)
+$$\\
+
+Multiplying: 
+$$
+\left(\begin{array}{cc} A & 0\\ 0& D-CA^{-1}B \end{array}\right)
+\left(\begin{array}{cc} I & A^{-1}B \\0& I \end{array}\right)=\left(\begin{array}{cc}A & B\\ 0& D-CA^{-1}B \end{array}\right)
+\hspace{1cm}------(ii)
+$$ \\
+Equation (ii) is same as second part of equation (i) and taking I as the identity matrix, therefore we can say M can decompose as the product of below term. \\
+$$
+M=\begin{pmatrix}
+A& B\\
+C & D
+\end{pmatrix}
+=\left(\begin{array}{cc} I & 0\\ CA^{-1} & I \end{array}\right)
+\left(\begin{array}{cc} A & 0\\ 0& D-CA^{-1}B \end{array}\right)
+\left(\begin{array}{cc} I & A^{-1}B \\0& I \end{array}\right)
+$$\\
+
+ 
+	\item \textbf{Suppose we decompose $ A= L
+	_1 U_1$ and $D-CA^{-1}B = L_2U_2$.  Show how to construct an LU factorization of M given these additional matrices.}\\
+
+\textbf{Solution.}\\
+
+Substituiting $ A= L
+_1 U_1$ and $D-CA^{-1}B = L_2U_2$ or  $D = L_2U_2+CA^{-1}B$ in  matrix M. \\
+$$
+M=\begin{pmatrix}
+A& B\\
+C & D
+\end{pmatrix}
+=\begin{pmatrix}
+	L_1U_1& B\\
+	C & L_2U_2+CL_1^{-1}U_1^{-1}B
+\end{pmatrix}
+$$\\
+
+ Now factorize M in terms of LU.
+ We know: 
+$$
+L= \left(\begin{array}{cc} 1 & 0\\ L_{21} & 1 \end{array}\right) , U=\left(\begin{array}{cc} U_{11} & U_{12}\\ 0& U_{22} \end{array}\right)
+$$ and
+$$
+ LU= \begin{pmatrix}
+U_{11}&  U_{12}\\
+L_{21}U_{11} & L_{21}U_{12}+U_{22} 
+\end{pmatrix} 
+=\begin{pmatrix}
+L_1U_1& B\\
+C & L_2U_2+CL_1^{-1}U_1^{-1}B
+\end{pmatrix} 
+$$ 
+
+Therefore we get:\\
+
+
+\hspace{1cm}$U_{11}=L_1U_1,\hspace{4cm}
+U_{12}=B$\\
+
+\hspace{1cm}$L_{21}U_{11}=C,\hspace{4cm}L_{21}= CL_1^{-1}U_1^{-1}$\\
+
+\hspace{1cm}$L_{21}U_{12}+U_{22} = L_2U_2+CL_1^{-1}U_1^{-1}B, 
+\hspace{2cm}U_{22} =L_2U_2\\
+$\\
+
+
+Substituiting the above values in L and U, we get\\
+$$
+L= \left(\begin{array}{cc} 1 & 0\\ CL_1^{-1}U_1^{-1}& 1 \end{array}\right) , U=
+\left(\begin{array}{cc}L_1U_1& B\\ 0& L_2U_2 \end{array}\right)
+$$
+Therefore M is reduced to 
+$$
+M= \left(\begin{array}{cc} 1 & 0\\ CL_1^{-1}U_1^{-1}& 1 \end{array}\right)
+\left(\begin{array}{cc}L_1U_1& B\\ 0& L_2U_2 \end{array}\right)
+$$ 
+\end{enumerate}
+\end{enumerate}
+
+\subsection*{Cholesky Factorization}
+\begin{enumerate}
+\setcounter{enumi}{9}
+\item \textbf{ Suppose that the symmetric $(n+1) \times (n+1)$ below matrix is positive definite.
+$$
+B = \begin{pmatrix}
+\alpha & a^T \\
+a & A
+\end{pmatrix}
+$$
+}
+\begin{enumerate}
+	\item \textbf{Show that the scalar $\alpha$ must be positive and the $n \times n$ matrix $A$ must be positive definite.}\\
+	
+	\textbf{Solution.}\\
+	
+	We know that B is a positive definite, so v a non-zero vector is represented as (n+1)x1, where $\hat{0}$ is zero elements of v, such that $v^{T}Bv >0$ i.e, positive.
+	$$
+	v= (\begin{array}{c} v_1\\ \hat{0}
+	\end{array})
+	$$
+	
+	$$v^{T}Bv >0$$\\
+	$$
+	=(\begin{array}{cc} v_1& \hat{0}
+	\end{array}) (\begin{array}{cc} \alpha & a^T \\
+	a & A
+	\end{array})(\begin{array}{c} v_1\\ \hat{0}
+	\end{array})
+	$$\\
+	$$
+	=(\begin{array}{cc} v_1\alpha & v_1a^T 
+	\end{array})(\begin{array}{c} v_1\\ \hat{0}
+	\end{array})= v_1\alpha v_1 >0
+	$$\\
+	Therefore we could proof that $\alpha$ is a positive definite. Now to proof matrix A is positive definite we consider  v as below, where $\hat{v}$ denotes a non-zero(n x 1) vector
+	$$
+	v= (\begin{array}{c} 0\\ \hat{v}
+	\end{array})
+	$$
+	
+	$$v^{T}Bv >0$$\\
+	$$
+	=(\begin{array}{cc} 0& \hat{v}^T
+	\end{array}) (\begin{array}{cc} \alpha & a^T \\
+	a & A
+	\end{array})(\begin{array}{c} 0\\ \hat{v}
+	\end{array})
+	$$\\
+	$$
+	=(\begin{array}{cc} \hat{v}^Ta & \hat{v}^TA
+	\end{array})(\begin{array}{c} 0\\ \hat{v}
+	\end{array})= \hat{v}^TA\hat{v}^T>0
+	$$\\
+
+	
+	Therefore we can say A is a positive definite.
+	
+	\item \textbf{What is the Cholesky factorization of $B$ in terms of $\alpha$, $a$, and the Cholesky factorization of $A - \frac{1}{\alpha} a a^T$?}\\
+	
+	\textbf{Solution.}\\
+	
+	We know Cholesky Factorization algorithm as $A=LL^{T}$ as 
+	
+	$$
+	\left [\begin{array}{cc} a_{11} & A_{21}^{T}\\ A_{21}& A_{22} \end{array}\right ]= \left [\begin{array}{cc} l_{11}& 0\\L_{21}&  L_{22} \end{array}\right ]
+	\left[\begin{array}{cc}l_{11}& L_{21}^{T}\\ 0& L_{22}^{T} \end{array}\right]
+	$$ \\
+	$$=
+	\left[\begin{array}{cc}l_{11}^{2}& l_{11}L_{21}^{T}\\ l_{11}L_{21}& L_{21}L_{21}^{T}+L_{22} L_{22}^{T} \end{array}\right]
+	$$ \\
+	where $l_{11}= \sqrt{a_{11}}=\sqrt{\alpha} $ , $L_{21}= \frac{A_{21}}{l_{11}}=\frac{a}{\sqrt{\alpha}}$ and $L_{22} L_{22}^{T}=A_{22}- L_{21} L_{21}^{T}$\\
+	
+	Let $A - \frac{1}{\alpha} a a^T= LL^T$ and by applying the above equation in B, we get L and $L^{T}$ as below:\\
+	
+	$$
+	L= \left [\begin{array}{cc} \sqrt{\alpha}& 0\\\frac{a}{\sqrt{\alpha}}&  L \end{array}\right ] , L^T=
+	\left[\begin{array}{cc}\sqrt{\alpha}& \frac{a^T}{\sqrt{\alpha}}\\ 0& L^{T} \end{array}\right]
+	$$ \\
+	$$
+	B= \left [\begin{array}{cc} \sqrt{\alpha}& 0\\\frac{a}{\sqrt{\alpha}}&  L \end{array}\right ]\left[\begin{array}{cc}\sqrt{\alpha}& \frac{a^T}{\sqrt{\alpha}}\\ 0& L^{T} \end{array}\right]=
+		\left[\begin{array}{cc}\alpha& a^T\\ a& \frac{aa^{T}}{\alpha}+LL^{T} \end{array}\right]
+	$$
+	We know $A - \frac{1}{\alpha} a a^T= LL^T$ , then 
+	$$
+	B=\left[\begin{array}{cc}\alpha& a^T\\ a& A \end{array}\right]
+	$$
+	
+\end{enumerate}
+\end{enumerate}
+
+
+\vspace{1cm}
+\textbf{ \Large References}\\
+\begin{enumerate}
+	\item "Scientific Computing"- An Introductory Survey by Michael T. Health.
+	\item Classnotes from CS-210
+	\item http://www.dartmouth.edu/~bradnelson/assignments/hw1.pdf
+	\item https://yutsumura.com/if-a-is-an-idempotent-matrix-then-when-i-ka-is-an-idempotent-matrix/
+	\item http://www.personal.soton.ac.uk/jav/soton/HELM/workbooks/workbook\_30/30\_3\_lu\_
+	decomposition.pdf
+	\item @MISC {197621,
+		TITLE = {Positive Definite Matrix Problem},
+		AUTHOR = {Amir (https://math.
+			stackexchange.com/users/40312/amir)},
+		HOWPUBLISHED = {Mathematics Stack 
+			Exchange},
+		NOTE = {URL:https://math.stackexchange.
+			com/q/197621 (version: 2012-
+			09-16)},
+		EPRINT = {https://math.stackexchange.
+			com/q/197621},
+		URL = {https://math.stackexchange.
+			com/q/197621}
+			}
+		\item http://www.cs.utexas.edu/~pingali/CS378/2011sp/lectures/chol4.pdf
+		\item http://www.math.harvard.edu/~elkies/M21b.08/det.html
+		\item https://en.wikipedia.org/wiki/Matrix\_norm
+\end{enumerate}
+\end{document}
